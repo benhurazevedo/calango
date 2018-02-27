@@ -45,6 +45,8 @@ abstract class BaseController
 			exit();
 		}
 		include $layoutPage;
+		#delete tempdata
+		#delete formToken
 		exit();
 	}
 	public function responseRedirect($controller=null,$action=null,$id=null)

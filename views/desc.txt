@@ -1,0 +1,3 @@
+you can place in subdirectories views for controllers and tamplates 
+here. Views will be named accordly to action names into directories 
+controller nameds.

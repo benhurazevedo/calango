@@ -45,8 +45,6 @@ abstract class BaseController
 			exit();
 		}
 		include $layoutPage;
-		#delete tempdata
-		#delete formToken
 		exit();
 	}
 	public function responseRedirect($controller=null,$action=null,$id=null)
@@ -62,6 +60,18 @@ abstract class BaseController
 	    }
         header("Location:../".$controller."/".$action."/".$id);
         return;
+	}
+	public function bind($object=null)
+	{
+	    if($object==null)
+	    {
+	        die("Bind method needs a object.");
+	    }
+	    foreach(get_object_vars($object) as $propertyName=>$value)
+	    {
+	        $object->$propertyName = isset($_POST[$propertyName])?$_POST[$propertyName]:null;
+	    }
+	    return $object;
 	}
 }
 ?>

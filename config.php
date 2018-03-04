@@ -4,4 +4,6 @@
 define('DSN','odbc:DRIVER={SQL Server};SERVER=(local)\SQLEXPRESS;DATABASE=UNIDADES');
 define("DATABASE_USER","sa");
 define("DB_PASSWORD", "sa");
+define("DEFAULT_CONTROLLER","A");
+define("DEFAULT_ACTION","oiAction");
 ?>

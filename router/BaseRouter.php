@@ -27,12 +27,18 @@ class BaseRouter{
 			}
 		}
 		else
-			$this->notFoundRouteAction();
+		{
+		    if(defined('DEFAULT_CONTROLLER') && defined('DEFAULT_ACTION'))
+		    {
+		        $this->responseRedirect(DEFAULT_CONTROLLER,DEFAULT_ACTION);
+		    }
+		    $this->notFoundRouteAction();
+		}
 	}
 	function __construct(){
-		$this->loadApplicationFilter();
-		$this->loadControllerFilter();
-		$this->loadActionFilter();
+		$this->loadApplicationFilter($this);
+		$this->loadControllerFilter($this);
+		$this->loadActionFilter($this);
 		$this->loadAction();
 	}
 	/*
@@ -83,6 +89,20 @@ class BaseRouter{
 				$this->loadFilter('filter\\' . $_GET["controller"] . '\\'. $_GET["action"] .'Filter'); 
 			}
 		}
+	}
+	public function responseRedirect($controller=null,$action=null,$id=null)
+	{
+	    if($controller==null && $action==null)
+	    {
+	        exit("Controller or action not defined.");
+	    }
+	    if($id == null)
+	    {
+	        header("Location:../".$controller."/".$action);
+	        return;
+	    }
+	    header("Location:../".$controller."/".$action."/".$id);
+	    return;
 	}
 }
 ?>

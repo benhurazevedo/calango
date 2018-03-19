@@ -6,5 +6,5 @@ define("DATABASE_USER","sa");
 define("DB_PASSWORD", "sa");
 define("DEFAULT_CONTROLLER","A");
 define("DEFAULT_ACTION","Oiaction");
-define("PATH","http://localhost:60000")
+define("PATH","http://localhost:60000/");
 ?>

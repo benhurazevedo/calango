@@ -16,6 +16,10 @@ class BaseRouter{
             catch(Exception $e) {
                 $this->notFoundRouteAction();
             }
+            if(!$class_exists)
+            {
+                $this->notFoundRouteAction();
+            }
             $controllerFullName = '\\controllers\\'.$_GET["controller"];
             $controller = new $controllerFullName($this);
             $actionName = $_GET["action"];
@@ -45,7 +49,7 @@ class BaseRouter{
      you can overload notFoundRouteAction to atempts to your needs
      */
     public function notFoundRouteAction(){
-        echo "Route not found.";
+        die("Route not found.");
     }
     
     private function loadFilter($filterClassName=null)

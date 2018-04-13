@@ -13,9 +13,6 @@
 	$this
 	new \config\Teste;
 	*/
-
-spl_autoload_extensions(".php");
-spl_autoload_register();
 include("config.php");
 $Html = new \services\htmlHelper\HtmlHelperService;
 new \router\BaseRouter;

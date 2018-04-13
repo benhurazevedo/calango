@@ -28,7 +28,7 @@ abstract class BaseController
     {
         $controlerName = $_GET["controller"];
         $actionName = $_GET["action"];
-        $viewPath = "views\\".$controlerName."\\".$actionName.".php";
+        $viewPath = "views".OS_PATH_SLASH.$controlerName.OS_PATH_SLASH.$actionName.".php";
         if(!file_exists($viewPath))
         {
             echo "View not implemented.";
@@ -55,12 +55,19 @@ abstract class BaseController
         }
         if($id == null)
         {
-            header("Location:".PATH."/".$controller."/".$action);
+            $url = str_replace("//", "/", PATH."/".$controller."/".$action);
+            $url = str_replace("http:/", "http://", $url);
+            $url = str_replace("https:/", "https://", $url);
+            header("Location:".$url);
             return;
         }
-        header("Location:". PATH. "/" .$controller."/".$action."/".$id);
+        $url = str_replace("//","/",PATH."/".$controller."/".$action."/".$id);
+        $url = str_replace("http:/", "http://", $url);
+        $url = str_replace("https:/", "https://", $url);
+        header("Location:".$url);
         return;
     }
+    /*
     public function bind($object=null)
     {
         if($object==null)
@@ -73,5 +80,6 @@ abstract class BaseController
         }
         return $object;
     }
+    */
 }
 ?>

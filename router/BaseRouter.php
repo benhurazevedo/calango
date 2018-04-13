@@ -11,7 +11,7 @@ class BaseRouter{
         $actionDeclared = isset($_GET["action"]);
         if($controllerDeclared && $actionDeclared){
             try {
-                $class_exists = class_exists('controllers\\'.$_GET["controller"], true);
+                $class_exists = class_exists('controllers'.OS_PATH_SLASH.$_GET["controller"], true);
             }
             catch(Exception $e) {
                 $this->notFoundRouteAction();
@@ -58,9 +58,10 @@ class BaseRouter{
         {
             return;
         }
+        $filterPath = str_replace("\\", OS_PATH_SLASH, $filterClassName);
         try
         {
-            $class_exists = class_exists($filterClassName,true);
+            $class_exists = class_exists($filterPath,true);
         }
         catch(Exception $e)
         {
@@ -102,10 +103,16 @@ class BaseRouter{
         }
         if($id == null)
         {
-            header("Location:".PATH."/".$controller."/".$action);
+            $url = str_replace("//", "/", PATH."/".$controller."/".$action);
+            $url = str_replace("http:/", "http://", $url);
+            $url = str_replace("https:/", "https://", $url);
+            header("Location:".$url);
             return;
         }
-        header("Location:". PATH. "/" .$controller."/".$action."/".$id);
+        $url = str_replace("//","/",PATH."/".$controller."/".$action."/".$id);
+        $url = str_replace("http:/", "http://", $url);
+        $url = str_replace("https:/", "https://", $url);
+        header("Location:".$url);
         return;
     }
 }

@@ -1,6 +1,10 @@
 <?php
-#define("CONNECTION_STRING", "DRIVER={SQL Server};SERVER=DESKTOP-00FFONP\SQLEXPRESS;DATABASE=UNIDADES");
-#define('DSN','sqlsrv:Server=(local)\SQLEXPRESS;Database=UNIDADES');
+#defining os path slash
+if(PHP_OS == "WINNT"){
+    define("OS_PATH_SLASH","\\");
+    spl_autoload_extensions(".php");
+    spl_autoload_register();
+}
 define('DSN','odbc:DRIVER={SQL Server};SERVER=(local)\SQLEXPRESS;DATABASE=UNIDADES');
 define("DATABASE_USER","sa");
 define("DB_PASSWORD", "sa");

@@ -11,7 +11,7 @@ class BaseRouter{
         $actionDeclared = isset($_GET["action"]);
         if($controllerDeclared && $actionDeclared){
             try {
-                $class_exists = class_exists('controllers'.OS_PATH_SLASH.$_GET["controller"], true);
+                $class_exists = class_exists('controllers\\'.$_GET["controller"], true);
             }
             catch(Exception $e) {
                 $this->notFoundRouteAction();
@@ -51,17 +51,17 @@ class BaseRouter{
     public function notFoundRouteAction(){
         die("Route not found.");
     }
-    
+
     private function loadFilter($filterClassName=null)
     {
         if($filterClassName==null)
         {
             return;
         }
-        $filterPath = str_replace("\\", OS_PATH_SLASH, $filterClassName);
+        #$filterPath = str_replace("\\", OS_PATH_SLASH, $filterClassName);
         try
         {
-            $class_exists = class_exists($filterPath,true);
+            $class_exists = class_exists($filterClassName,true);
         }
         catch(Exception $e)
         {
@@ -72,7 +72,7 @@ class BaseRouter{
             $className = '\\'. $filterClassName;
             new $className();
         }
-        
+
     }
     public function loadApplicationFilter()
     {

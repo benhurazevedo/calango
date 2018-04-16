@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 /*
 	global gera uma variavel global

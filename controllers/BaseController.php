@@ -14,6 +14,7 @@ abstract class BaseController
     public function responseApi()
     {
         $httpMethodName="do".$_SERVER['REQUEST_METHOD'];
+		header('Content-Type: application/json; charset=utf-8');
         if(method_exists($this,$httpMethodName))
         {
             $this->$httpMethodName();

@@ -16,12 +16,10 @@ class HtmlHelperService{
     {
         if($routeParams=="")
         {
-            #return "../../index.php?controller=".$controllerName."&action=".$actionName;
             return $this->generateBaseURL().$controllerName."/".$actionName;
         }
         else
         {
-            #return "index.php?controller=".$controllerName."&action=".$actionName."&".$routeParams;
             return $this->generateBaseURL().$controllerName."/".$actionName."/".$routeParams;
         }
     }
@@ -31,20 +29,6 @@ class HtmlHelperService{
     }
     private function generateBaseURL()
     {
-        /*
-         if(isset($_GET["id"]) && isset($_GET["action"]) && isset($_GET["controller"]))
-         {
-         return "../../";
-         }
-         else if(isset($_GET["action"]) && isset($_GET["controller"]))
-         {
-         return "../";
-         }
-         else
-         {
-         return "./";
-         }
-         */
         return defined("PATH")?PATH:"";
     }
     public function setTempData($name=NULL, $value=NULL)
@@ -66,37 +50,6 @@ class HtmlHelperService{
         $value = isset($_SESSION[$key])?$_SESSION[$key]:null;
         unset($_SESSION[$key]);
         return $value;
-    }
-    public function setFormToken()
-    {
-        $token = rand();
-        if(!isset($_SESSION['formToken']))
-        {
-            $_SESSION['formToken'] = array();
-        }
-        array_push($_SESSION['formToken'], $token);
-        return "<input type='hidden' name='formToken' value='$token'>";
-    }
-    public function validateFormToken()
-    {
-        if(!isset($_SESSION['formToken']))
-        {
-            return false;
-        }
-        if(!is_array($_SESSION['formToken']))
-        {
-            return false;
-        }
-        if(!isset($_POST['formToken']))
-        {
-            return false;
-        }
-        if(!$formTokenIndex = array_search($_POST['formToken'], $_SESSION['formToken']))
-        {
-            return false;
-        }
-        unset($_SESSION['formToken'][$formTokenIndex]);
-        return true;
     }
 }
 ?>

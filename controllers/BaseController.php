@@ -67,19 +67,19 @@ abstract class BaseController
         header("Location:".$url);
         return;
     }
-    /*
-    public function bind($object=null)
+    public function bye()
     {
-        if($object==null)
+        $_SESSION = array();
+        if (ini_get("session.use_cookies")) 
         {
-            die("Bind method needs a object.");
+            $params = session_get_cookie_params();
+            setcookie(session_name(), '', time() - 42000,
+                $params["path"], $params["domain"],
+                $params["secure"], $params["httponly"]
+                );
         }
-        foreach(get_object_vars($object) as $propertyName=>$value)
-        {
-            $object->$propertyName = isset($_POST[$propertyName])?$_POST[$propertyName]:null;
-        }
-        return $object;
+        session_destroy();
+        die("<html><body><pre>Aplicação Finalizada</pre></body></html>");
     }
-    */
 }
 ?>

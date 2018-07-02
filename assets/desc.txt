@@ -1,0 +1,1 @@
+put here your static files like css and js
